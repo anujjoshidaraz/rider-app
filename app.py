@@ -41,13 +41,31 @@ ADMIN_PASSWORD = "daraz2026"  # Change this to your preferred admin password
 
 # ─── Locate dws-core executable ───────────────────────────────────────────────
 def _find_dws_core():
-    """Find the dws-core .exe — works from both Python and PyInstaller bundle."""
+    """Find the dws-core executable — works on Windows, Linux, and macOS."""
+    import platform
     home = os.path.expanduser("~")
-    candidates = [
-        os.path.join(home, ".qoderwork", "bin", "ext", "dws-core-windows-amd64.exe"),
-    ]
-    if getattr(sys, "frozen", False):
-        candidates.append(os.path.join(os.path.dirname(sys.executable), "dws-core-windows-amd64.exe"))
+    system = platform.system().lower()
+    
+    candidates = []
+    
+    if system == 'windows':
+        candidates = [
+            os.path.join(home, ".qoderwork", "bin", "ext", "dws-core-windows-amd64.exe"),
+        ]
+        if getattr(sys, "frozen", False):
+            candidates.append(os.path.join(os.path.dirname(sys.executable), "dws-core-windows-amd64.exe"))
+    elif system == 'linux':
+        candidates = [
+            os.path.join(home, ".qoderwork", "bin", "dws"),
+            '/usr/local/bin/dws',
+            os.path.join(home, "dws"),
+        ]
+    else:  # macOS
+        candidates = [
+            os.path.join(home, ".qoderwork", "bin", "dws"),
+            '/usr/local/bin/dws',
+        ]
+    
     for path in candidates:
         if os.path.isfile(path):
             return path
