@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ],
+  "env": {
+    "DINGTALK_CLIENT_ID": "dingmex5kegeocexk1dh",
+    "DINGTALK_CLIENT_SECRET": "PmE0clXdL7lx8Un0cJZId5qc0dV8kYwP5kGGj30XQ9mOjeH0O8MzEcjMK4jrdDnx"
+  }
+}
