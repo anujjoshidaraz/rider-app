@@ -78,7 +78,13 @@ def _run_dws(args, timeout=60):
     """Run a dws-core command and return parsed JSON."""
     if not DWS_CORE:
         raise Exception("dws-core not found. Make sure QoderWork is installed.")
-    cmd = [DWS_CORE] + args
+    cmd = [DWS_CORE]
+    # Add service account auth flags if environment variables are set (for Render deployment)
+    client_id = os.environ.get('DINGTALK_CLIENT_ID')
+    client_secret = os.environ.get('DINGTALK_CLIENT_SECRET')
+    if client_id and client_secret:
+        cmd.extend(['--client-id', client_id, '--client-secret', client_secret])
+    cmd.extend(args)
     result = subprocess.run(
         cmd,
         capture_output=True,
