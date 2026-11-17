@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "agentId": "de4b3096-f568-44b9-9872-fbe717c3851e",
+  "machineId": "de4b3096-f568-44b9-9872-fbe717c3851e",
+  "source": "dws",
+  "agents": {
+    "QoderWork": {
+      "agentId": "dwsa_LDLf1cSQA6bo",
+      "firstSeen": "2026-10-29T14:50:53Z",
+      "detect": "env:DINGTALK_DWS_AGENTCODE"
+    },
+    "qwenwork": {
+      "agentId": "dwsa_s0ZSpjPHI4Co",
+      "firstSeen": "2026-11-13T04:57:51Z",
+      "detect": "env:DINGTALK_DWS_AGENTCODE"
+    }
+  }
+}

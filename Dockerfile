@@ -16,6 +16,9 @@ RUN curl -L https://github.com/DingTalk-Real-AI/dingtalk-workspace-cli/releases/
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy dws-core auth file
+COPY .dws /root/.dws
+
 # Copy application code
 COPY . .
 

@@ -1,0 +1,46 @@
+{
+  "event_id": "evt_1794891730215040400",
+  "recorded_at": "2026-11-17T05:02:10.2150404Z",
+  "context": {
+    "command_path": [
+      "sheet",
+      "range",
+      "read"
+    ],
+    "server_id": "sheet",
+    "tool_name": "get_cell_infos",
+    "operation_kind": "read",
+    "raw_error": "request to https://mcp-gw.dingtalk.com/server/f7340bef5170f3baf97815989fc2bff68f4c293be82b2106c5d3e9cbbb14a17f failed: Post \"https://mcp-gw.dingtalk.com/server/f7340bef5170f3baf97815989fc2bff68f4c293be82b2106c5d3e9cbbb14a17f\": dial tcp: lookup mcp-gw.dingtalk.com: no such host",
+    "call_stage": "request",
+    "args_summary": {
+      "nodeId": "EpGBa2Lm8azLbBLwTzjp705DWgN7R35y",
+      "range": "A2:C5000",
+      "sheetId": "st-700fb79b-272758"
+    },
+    "fingerprint": "06f4c0f7fe136e3f5120313bb89da46344c8eade"
+  },
+  "replay": {
+    "server_id": "sheet",
+    "tool_name": "get_cell_infos",
+    "operation_kind": "read",
+    "tool_args": {
+      "nodeId": "EpGBa2Lm8azLbBLwTzjp705DWgN7R35y",
+      "range": "A2:C5000",
+      "sheetId": "st-700fb79b-272758"
+    },
+    "redacted_argv": [
+      "sheet",
+      "range",
+      "read",
+      "--node",
+      "EpGBa2Lm8azLbBLwTzjp705DWgN7R35y",
+      "--sheet-id",
+      "st-700fb79b-272758",
+      "--range",
+      "A2:C5000",
+      "--format",
+      "json"
+    ],
+    "redacted_command": "sheet range read --node EpGBa2Lm8azLbBLwTzjp705DWgN7R35y --sheet-id st-700fb79b-272758 --range A2:C5000 --format json"
+  }
+}
