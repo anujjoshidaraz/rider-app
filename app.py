@@ -2584,6 +2584,58 @@ async function sendToWhatsApp(row){
 </body>
 </html>"""
 
+
+# ─── Debug endpoint to test dws-core ─────────────────────────────────────────
+@app.route("/api/debug/dws-test")
+def dws_test():
+    """Test dws-core authentication and connectivity."""
+    import platform
+    home = os.path.expanduser("~")
+
+    # Check if dws-core exists
+    dws_path = _find_dws_core()
+    if not dws_path:
+        return jsonify({"error": "dws-core not found", "home": home})
+
+    # Check if .dws folder exists
+    dws_folder = os.path.join(home, ".dws")
+    dws_exists = os.path.isdir(dws_folder)
+
+    # List files in .dws folder
+    dws_files = []
+    if dws_exists:
+        dws_files = os.listdir(dws_folder)
+
+    # Try running a simple dws command
+    try:
+        result = _run_dws(["--version"], timeout=10)
+        version = result.get("version", "unknown") if isinstance(result, dict) else str(result)
+    except Exception as e:
+        version = f"Error: {str(e)}"
+
+    # Try fetching riders
+    try:
+        riders_result = _run_dws([
+            "sheet", "range", "read",
+            "--node", NODE_ID,
+            "--sheet-id", RIDERS_SHEET_ID,
+            "--format", "json",
+        ], timeout=30)
+        riders_test = "Success" if "cells" in riders_result else f"Error: {riders_result.get('error', {}).get('message', 'Unknown')}"
+    except Exception as e:
+        riders_test = f"Exception: {str(e)}"
+
+    return jsonify({
+        "dws_path": dws_path,
+        "home": home,
+        "dws_folder_exists": dws_exists,
+        "dws_files": dws_files,
+        "version": version,
+        "riders_test": riders_test,
+        "platform": platform.system(),
+    })
+
+
 # ─── Main ─────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     # Only open browser for local development
