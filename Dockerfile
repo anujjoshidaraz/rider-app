@@ -22,6 +22,10 @@ COPY .dws /root/.dws
 # Copy application code
 COPY . .
 
+# Copy and set entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Expose port
 EXPOSE 8000
 
@@ -29,5 +33,5 @@ EXPOSE 8000
 ENV PORT=8000
 ENV PYTHONUNBUFFERED=1
 
-# Run with gunicorn
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:8000", "--workers", "2", "--timeout", "120"]
+# Run entrypoint (auth + gunicorn)
+CMD ["/entrypoint.sh"]
